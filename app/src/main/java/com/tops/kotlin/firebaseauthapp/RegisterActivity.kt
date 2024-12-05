@@ -18,18 +18,35 @@ class RegisterActivity : AppCompatActivity() {
         binding = ActivityRegisterBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
+        binding.tvLogin.setOnClickListener {
+            val intent = Intent(this, LoginActivity::class.java)
+            startActivity(intent)
+            finish()
+        }
+
         binding.btnRegister.setOnClickListener {
             val email = binding.etEmail.text.toString()
             val password = binding.etPassword.text.toString()
-            val confirm_password = binding.etConfirmPassword.text.toString()
+            val cpassword = binding.etConfirmPassword.text.toString()
 
-            if (email.isNotEmpty() && password.isNotEmpty() && confirm_password.isNotEmpty()) {
-                if (password == confirm_password) {
+            if (email.isNotEmpty() && password.isNotEmpty() && cpassword.isNotEmpty()) {
+                if (password == cpassword) {
                     firebaseAuth = FirebaseAuth.getInstance()
                     firebaseAuth.createUserWithEmailAndPassword(email, password)
-
-                    startActivity(Intent(this, LoginActivity::class.java))
-                    Toast.makeText(this, "Account created successfully!!!", Toast.LENGTH_SHORT).show()
+                        .addOnCompleteListener {
+                            if (it.isSuccessful) {
+                                Toast.makeText(
+                                    this,
+                                    "Account created successfully!!!",
+                                    Toast.LENGTH_SHORT
+                                ).show()
+                                startActivity(Intent(this, LoginActivity::class.java))
+                                finish()
+                            } else {
+                                Toast.makeText(this, it.exception.toString(), Toast.LENGTH_SHORT)
+                                    .show()
+                            }
+                        }
                 } else {
                     Toast.makeText(this, "Passwords do not match", Toast.LENGTH_SHORT).show()
                 }
