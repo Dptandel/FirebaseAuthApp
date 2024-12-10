@@ -10,7 +10,6 @@ import com.tops.kotlin.firebaseauthapp.databinding.ActivityRegisterBinding
 class RegisterActivity : AppCompatActivity() {
 
     private lateinit var binding: ActivityRegisterBinding
-
     private lateinit var firebaseAuth: FirebaseAuth
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -18,13 +17,13 @@ class RegisterActivity : AppCompatActivity() {
         binding = ActivityRegisterBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
-        firebaseAuth = FirebaseAuth.getInstance()
-
         binding.tvLogin.setOnClickListener {
             val intent = Intent(this, LoginActivity::class.java)
             startActivity(intent)
             finish()
         }
+
+        firebaseAuth = FirebaseAuth.getInstance()
 
         binding.btnRegister.setOnClickListener {
             val email = binding.etEmail.text.toString()
