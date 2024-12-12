@@ -8,13 +8,19 @@ import androidx.activity.enableEdgeToEdge
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.view.ViewCompat
 import androidx.core.view.WindowInsetsCompat
+import com.google.android.gms.auth.api.signin.GoogleSignIn
+import com.google.android.gms.auth.api.signin.GoogleSignInClient
+import com.google.android.gms.auth.api.signin.GoogleSignInOptions
 import com.google.firebase.auth.FirebaseAuth
+import com.google.firebase.auth.ktx.auth
+import com.google.firebase.ktx.Firebase
 import com.tops.kotlin.firebaseauthapp.databinding.ActivityHomeBinding
 
 class HomeActivity : AppCompatActivity() {
 
     private lateinit var binding: ActivityHomeBinding
     private lateinit var firebaseAuth: FirebaseAuth
+    private lateinit var googleSignInClient: GoogleSignInClient
 
     @SuppressLint("SetTextI18n")
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -24,13 +30,32 @@ class HomeActivity : AppCompatActivity() {
 
         firebaseAuth = FirebaseAuth.getInstance()
 
-        binding.tvUsername.text = "Hello, " + firebaseAuth.currentUser?.email
+        val gso = GoogleSignInOptions.Builder(GoogleSignInOptions.DEFAULT_SIGN_IN)
+            .requestIdToken(getString(R.string.default_web_client_id))
+            .requestEmail()
+            .build()
+
+        googleSignInClient = GoogleSignIn.getClient(this, gso)
+
+        val userName = binding.tvUsername
+
+        val auth = Firebase.auth
+        val user = auth.currentUser
+
+        if (user != null) {
+            userName.text = "Hello, " + user.displayName
+        } else {
+            Toast.makeText(this, "User is not found!!!", Toast.LENGTH_SHORT).show()
+        }
 
         binding.btnLogout.setOnClickListener {
             firebaseAuth.signOut()
-            Toast.makeText(this, "Logout successfully!!!", Toast.LENGTH_SHORT).show()
-            startActivity(Intent(this, LoginActivity::class.java))
-            finish()
+
+            googleSignInClient.signOut().addOnCompleteListener {
+                Toast.makeText(this, "Logout successfully!!!", Toast.LENGTH_SHORT).show()
+                startActivity(Intent(this, LoginActivity::class.java))
+                finish()
+            }
         }
     }
 }
