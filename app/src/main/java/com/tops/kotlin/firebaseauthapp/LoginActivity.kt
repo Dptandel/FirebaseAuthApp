@@ -39,10 +39,6 @@ class LoginActivity : AppCompatActivity() {
             signInWithGoogle()
         }
 
-        binding.btnFacebookSignIn.setOnClickListener {
-            Toast.makeText(this, "Facebook Sign In!!!", Toast.LENGTH_SHORT).show()
-        }
-
         binding.btnLogin.setOnClickListener {
             val email = binding.etEmail.text.toString()
             val password = binding.etPassword.text.toString()
