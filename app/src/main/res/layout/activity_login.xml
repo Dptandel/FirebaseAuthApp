@@ -78,14 +78,16 @@
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintVertical_bias="0.7" />
 
-    <Button
+    <androidx.appcompat.widget.AppCompatButton
         android:id="@+id/btn_google_signIn"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginHorizontal="24dp"
-        android:backgroundTint="@color/white"
-        android:drawableLeft="@drawable/ic_google"
+        android:background="@drawable/btn_bg"
+        android:drawableStart="@drawable/ic_google"
+        android:drawablePadding="8dp"
+        android:padding="16dp"
         android:text="Sign In with Google"
+        android:textAllCaps="false"
         android:textColor="@color/black"
         android:textSize="16sp"
         app:layout_constraintBottom_toBottomOf="parent"
@@ -93,5 +95,23 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintVertical_bias="0.8" />
+
+    <androidx.appcompat.widget.AppCompatButton
+        android:id="@+id/btn_facebook_signIn"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:background="@drawable/btn_bg"
+        android:drawableStart="@drawable/ic_facebook"
+        android:drawablePadding="8dp"
+        android:padding="16dp"
+        android:text="Sign In with Facebook"
+        android:textAllCaps="false"
+        android:textColor="@color/black"
+        android:textSize="16sp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.9" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

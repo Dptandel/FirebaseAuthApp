@@ -3,16 +3,12 @@ package com.tops.kotlin.firebaseauthapp
 import android.content.Intent
 import android.os.Bundle
 import android.widget.Toast
-import androidx.activity.enableEdgeToEdge
 import androidx.appcompat.app.AppCompatActivity
-import androidx.core.view.ViewCompat
-import androidx.core.view.WindowInsetsCompat
 import com.google.android.gms.auth.api.signin.GoogleSignIn
 import com.google.android.gms.auth.api.signin.GoogleSignInClient
 import com.google.android.gms.auth.api.signin.GoogleSignInOptions
 import com.google.android.gms.common.api.ApiException
 import com.google.firebase.auth.FirebaseAuth
-import com.google.firebase.auth.GoogleAuthCredential
 import com.google.firebase.auth.GoogleAuthProvider
 import com.tops.kotlin.firebaseauthapp.databinding.ActivityLoginBinding
 
@@ -41,6 +37,10 @@ class LoginActivity : AppCompatActivity() {
 
         binding.btnGoogleSignIn.setOnClickListener {
             signInWithGoogle()
+        }
+
+        binding.btnFacebookSignIn.setOnClickListener {
+            Toast.makeText(this, "Facebook Sign In!!!", Toast.LENGTH_SHORT).show()
         }
 
         binding.btnLogin.setOnClickListener {
@@ -84,7 +84,7 @@ class LoginActivity : AppCompatActivity() {
                 val account = task.getResult(ApiException::class.java)
                 firebaseAuthWithGoogle(account.idToken!!)
             } catch (e: ApiException) {
-                Toast.makeText(this, "failed: ${e.message}", Toast.LENGTH_SHORT).show()
+                Toast.makeText(this, "Google Login Failed: ${e.message}", Toast.LENGTH_SHORT).show()
             }
         }
     }
