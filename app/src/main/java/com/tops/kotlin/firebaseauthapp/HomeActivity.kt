@@ -4,10 +4,7 @@ import android.annotation.SuppressLint
 import android.content.Intent
 import android.os.Bundle
 import android.widget.Toast
-import androidx.activity.enableEdgeToEdge
 import androidx.appcompat.app.AppCompatActivity
-import androidx.core.view.ViewCompat
-import androidx.core.view.WindowInsetsCompat
 import com.google.android.gms.auth.api.signin.GoogleSignIn
 import com.google.android.gms.auth.api.signin.GoogleSignInClient
 import com.google.android.gms.auth.api.signin.GoogleSignInOptions
@@ -40,12 +37,16 @@ class HomeActivity : AppCompatActivity() {
         val userName = binding.tvUsername
 
         val auth = Firebase.auth
-        val user = auth.currentUser
+        val user = auth.currentUser?.displayName ?: firebaseAuth.currentUser?.email
 
         if (user != null) {
-            userName.text = "Hello, " + user.displayName
+            userName.text = "Hello, $user"
         } else {
             Toast.makeText(this, "User is not found!!!", Toast.LENGTH_SHORT).show()
+        }
+
+        binding.btnAddContact.setOnClickListener {
+            startActivity(Intent(this, ContactActivity::class.java))
         }
 
         binding.btnLogout.setOnClickListener {
