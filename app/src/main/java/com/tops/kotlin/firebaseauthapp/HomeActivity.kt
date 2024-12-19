@@ -143,7 +143,6 @@ class HomeActivity : AppCompatActivity() {
 
 
         dialog.window?.setBackgroundDrawableResource(android.R.color.transparent)
-        dialog.setCancelable(false)
         dialog.window?.setLayout(
             (resources.displayMetrics.widthPixels * 0.90).toInt(),
             (resources.displayMetrics.heightPixels * 0.45).toInt()
