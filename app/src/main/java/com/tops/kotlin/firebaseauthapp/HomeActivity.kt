@@ -8,9 +8,7 @@ import android.view.LayoutInflater
 import android.view.Menu
 import android.view.MenuItem
 import android.view.View
-import android.view.Window
 import android.widget.Toast
-import androidx.appcompat.app.AlertDialog
 import androidx.appcompat.app.AppCompatActivity
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.google.android.gms.auth.api.signin.GoogleSignIn
@@ -26,7 +24,7 @@ import com.google.firebase.database.FirebaseDatabase
 import com.google.firebase.database.ValueEventListener
 import com.google.firebase.ktx.Firebase
 import com.tops.kotlin.firebaseauthapp.databinding.ActivityHomeBinding
-import com.tops.kotlin.firebaseauthapp.databinding.ContactUpdateDialogBinding
+import com.tops.kotlin.firebaseauthapp.databinding.ContactEditDialogBinding
 import com.tops.kotlin.firebaseauthapp.models.Contact
 
 class HomeActivity : AppCompatActivity() {
@@ -87,7 +85,7 @@ class HomeActivity : AppCompatActivity() {
                     }
                     val contactAdapter =
                         ContactAdapter(this@HomeActivity, contacts, onItemClick = { contact ->
-                            showUpdateDialog(contact)
+                            showEditDialog(contact)
                         })
                     binding.rvContacts.adapter = contactAdapter
 
@@ -103,10 +101,10 @@ class HomeActivity : AppCompatActivity() {
         })
     }
 
-    private fun showUpdateDialog(contact: Contact) {
+    private fun showEditDialog(contact: Contact) {
         val dialog = Dialog(this)
         val dialogBinding =
-            ContactUpdateDialogBinding.inflate(LayoutInflater.from(this), null, false)
+            ContactEditDialogBinding.inflate(LayoutInflater.from(this), null, false)
         dialog.setContentView(dialogBinding.root)
         dialogBinding.etName.setText(contact.name)
         dialogBinding.etContact.setText(contact.contact)
