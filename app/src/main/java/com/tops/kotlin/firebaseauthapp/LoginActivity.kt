@@ -39,6 +39,10 @@ class LoginActivity : AppCompatActivity() {
             signInWithGoogle()
         }
 
+        binding.btnMobileSignIn.setOnClickListener {
+            loginWithMobile()
+        }
+
         binding.btnLogin.setOnClickListener {
             val email = binding.etEmail.text.toString()
             val password = binding.etPassword.text.toString()
@@ -57,6 +61,11 @@ class LoginActivity : AppCompatActivity() {
                 Toast.makeText(this, "Please fill all fields", Toast.LENGTH_SHORT).show()
             }
         }
+    }
+
+    private fun loginWithMobile() {
+        startActivity(Intent(this, MobileLoginActivity::class.java))
+        finish()
     }
 
     private fun signInWithGoogle() {

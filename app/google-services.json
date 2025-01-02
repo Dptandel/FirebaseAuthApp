@@ -1,6 +1,7 @@
 {
   "project_info": {
     "project_number": "684446922063",
+    "firebase_url": "https://fir-authapp-f543a-default-rtdb.firebaseio.com",
     "project_id": "fir-authapp-f543a",
     "storage_bucket": "fir-authapp-f543a.firebasestorage.app"
   },
